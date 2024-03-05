@@ -1,0 +1,25 @@
+---
+   name Alma 9.1
+   hosts Server_Migration
+   remote_user root
+   become true
+   tasks
+       name install -y http://repo.almalinux.org/elevate/elevate-release-latest-el7.noarch.rpm
+        yum                
+            name http://repo.almalinux.org/elevate/elevate-release-latest-el7.noarch.rpm
+            state latest
+   tasks
+       name install -y leapp-upgrade leapp-data-almalinux
+       yum
+         name:upgrade
+      -name rmmod pata_acpi
+       packages
+               name pata_scpi
+               state excecute
+      -name root login access
+       echo
+            content echo PermitRootLogin yes | sudo tee -a /etc/ssh/sshd_config
+      -name run leapp upgrade
+       packages
+            name leapp upgrade
+            state execute
